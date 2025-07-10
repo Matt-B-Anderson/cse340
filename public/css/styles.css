@@ -83,9 +83,11 @@ nav a {
 }
 
 .hero-content {
-    position: relative;
+    position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     pointer-events: none;
 }
 
@@ -192,9 +194,9 @@ footer {
     margin-top: 2rem;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 414px) {
     nav ul {
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
     }
 
@@ -207,12 +209,9 @@ footer {
     }
 
     .promo-text {
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 1rem;
+        left: 1rem;
+        max-width: 90%;
     }
 
-    .hero-title {
-        left: 50%;
-        transform: translateX(-50%);
-    }
 }
