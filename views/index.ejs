@@ -1,1 +1,50 @@
-<h1>Matt Anderson</h1>
+<h2 class="welcome-text"><%= welcomeTitle %></h2>
+<section class="intro hero">
+    <div class="hero-container">
+        <img
+        class="hero-bg"
+        src="/images/vehicles/<%= carImage %>"
+        alt="<%= carImageAlt %>"
+        />
+
+        <div class="hero-content">
+            <div class="promo-text">
+                <h3><%= carName %></h3>
+                <ul>
+                    <% carFeatures.forEach(function(feature) { %>
+                    <li><%= feature %></li>
+                    <% }); %>
+                </ul>
+                <a class="button" href="<%= promoButtonHref %>">
+                    <%= promoButtonText %>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews-upgrades">
+    <div class="upgrades">
+        <h3><%= upgradesTitle %></h3>
+        <div class="grid">
+            <% upgrades.forEach(upgrade => { %>
+                <div class="upgrade-container">
+                    <div class="upgrade-img">
+                        <img src="/images/upgrades/<%= upgrade.image %>" alt="<%= upgrade.alt %>" />
+                    </div>
+                    <div class="upgrade-link">
+                        <a href="<%= upgrade.link %>"><%= upgrade.name %></a>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+    <div class="reviews">
+        <h3><%= reviewsTitle %></h3>
+        <ul>
+            <% reviews.forEach(review => { %>
+                <li><%= review %></li>
+            <% }); %>
+        </ul>
+    </div>
+</section>

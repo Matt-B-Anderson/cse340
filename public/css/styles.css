@@ -1,6 +1,218 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+:root {
+    --background: #ffffff;
+    --text: #000000;
+    --accent: #0055aa;
+    --button-bg: #007acc;
+    --button-text: #ffffff;
+    --nav-bg: #22223b;
+    --nav-text: #ffffff;
+    --upgrade-bg: #00bcd4;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    color: var(--nav-bg);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.account a {
+    color: var(--text);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav {
+    background: var(--nav-bg);
+    padding: 0.5rem 2rem;
+    width: 92%;
+    margin: 0 auto;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 7rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.welcome-text {
+    padding-left: .85rem;
+}
+
+.intro.hero {
+    display: block;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 4rem;
+}
+
+.hero-container {
+    position: relative;
+    width: 100%;
+}
+
+.hero-bg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+}
+
+.promo-text {
+    position: absolute;
+    bottom: 10rem;
+    left: 1.5rem;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 350px;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.promo-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+
+.promo-text ul li {
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.reviews-upgrades {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+}
+
+.upgrades,
+.reviews {
+    flex: 1;
+    min-width: 280px;
+    padding-left: .85rem;
+}
+
+.upgrades .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.upgrade-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upgrade-img {
+    width: 160px;
+    margin-bottom: 0.5rem;
+    background: var(--upgrade-bg);
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+.upgrade-img img {
+    max-height: 65px;
+    align-self: center;
+}
+
+.upgrade-link {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.reviews h3 {
+    margin-bottom: 1rem;
+}
+
+.reviews ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+}
+
+footer {
+    text-align: start;
+    color: var(--text);
+    padding: 1rem .85rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .reviews-upgrades {
+        flex-direction: column;
+    }
+
+    .upgrades .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .promo-text {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .hero-title {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
