@@ -10,6 +10,8 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
+const baseController = require("./controllers/baseController");
+const inventoryRoute = require("./routes/inventoryRoute");
 
 /* ***********************
  * View Engine and Template
@@ -23,63 +25,9 @@ app.set("layout", "./layouts/layout"); // not at views root
  *************************/
 app.use(static);
 // Index route
-app.get("/", function (reg, res) {
-	res.render("index", {
-		title: "CSE Motors",
-		siteName: "CSE Motors",
-		navLinks: [
-			{ href: "/", text: "Home" },
-			{ href: "/custom", text: "Custom" },
-			{ href: "/sedan", text: "Sedan" },
-			{ href: "/suv", text: "SUV" },
-			{ href: "/truck", text: "Truck" },
-		],
-		accountHref: "/account",
-		accountText: "My Account",
-		welcomeTitle: "Welcome to CSE Motors!",
-		carName: "DMC Delorean",
-		carImage: "delorean.jpg",
-		carImageAlt: "Cartoon drawing of a DMC Delorean car",
-		carFeatures: ["3 Cup holders", "Superman doors", "Fuzzy dice!"],
-		promoButtonHref: "/purchase",
-		promoButtonText: "Own Today",
-		reviewsTitle: "DMC Delorean Reviews",
-		reviews: [
-			'"So fast it\'s almost like traveling in time." (4/5)',
-			'"Coolest ride on the road." (4/5)',
-			'"I\'m feeling McFly!" (5/5)',
-			'"The most futuristic ride of our day." (4.5/5)',
-			'"80\'s livin and I love it!" (5/5)',
-		],
-		upgradesTitle: "Delorean Upgrades",
-		upgrades: [
-			{
-				image: "flux-cap.png",
-				alt: "Flux Capacitor",
-				name: "Flux Capacitor",
-				link: "/upgrades/flux",
-			},
-			{
-				image: "flame.jpg",
-				alt: "Flame Decals",
-				name: "Flame Decals",
-				link: "/upgrades/flame",
-			},
-			{
-				image: "bumper_sticker.jpg",
-				alt: "Bumper Stickers",
-				name: "Bumper Stickers",
-				link: "/upgrades/bumper",
-			},
-			{
-				image: "hub-cap.jpg",
-				alt: "Hub Caps",
-				name: "Hub Caps",
-				link: "/upgrades/hubcaps",
-			},
-		],
-	});
-});
+app.get("/", baseController.buildHome);
+// Inventory routes
+app.use("/inv", inventoryRoute);
 
 /* ***********************
  * Local Server Information

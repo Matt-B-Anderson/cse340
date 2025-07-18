@@ -1,50 +1,98 @@
-<h2 class="welcome-text"><%= welcomeTitle %></h2>
-<section class="intro hero">
-    <div class="hero-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSE Motors</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-name">
+      <a href="/">CSE Motors</a>
+    </div>
+    <div class="account-link">
+      <a href="/account">My Account</a>
+    </div>
+  </header>
+
+  <main>
+    <h2 class="welcome-text">Welcome to CSE Motors!</h2>
+
+    <section class="intro hero">
+      <div class="hero-container">
         <img
-        class="hero-bg"
-        src="/images/vehicles/<%= carImage %>"
-        alt="<%= carImageAlt %>"
+          class="hero-bg"
+          src="/images/vehicles/delorean.jpg"
+          alt="Cartoon drawing of a DMC Delorean car"
         />
 
         <div class="hero-content">
-            <div class="promo-text">
-                <h3><%= carName %></h3>
-                <ul>
-                    <% carFeatures.forEach(function(feature) { %>
-                    <li><%= feature %></li>
-                    <% }); %>
-                </ul>
-                <a class="button" href="<%= promoButtonHref %>">
-                    <%= promoButtonText %>
-                </a>
-            </div>
+          <div class="promo-text">
+            <h3>DMC Delorean</h3>
+            <ul>
+              <li>3 Cup holders</li>
+              <li>Superman doors</li>
+              <li>Fuzzy dice!</li>
+            </ul>
+            <a class="button" href="/purchase">
+              Own Today
+            </a>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="reviews-upgrades">
-    <div class="upgrades">
-        <h3><%= upgradesTitle %></h3>
+    <section class="reviews-upgrades">
+      <div class="upgrades">
+        <h3>Delorean Upgrades</h3>
         <div class="grid">
-            <% upgrades.forEach(upgrade => { %>
-                <div class="upgrade-container">
-                    <div class="upgrade-img">
-                        <img src="/images/upgrades/<%= upgrade.image %>" alt="<%= upgrade.alt %>" />
-                    </div>
-                    <div class="upgrade-link">
-                        <a href="<%= upgrade.link %>"><%= upgrade.name %></a>
-                    </div>
-                </div>
-            <% }); %>
+          <div class="upgrade-container">
+            <div class="upgrade-img">
+              <img src="/images/upgrades/flux-cap.png" alt="Flux Capacitor" />
+            </div>
+            <div class="upgrade-link">
+              <a href="/upgrades/flux">Flux Capacitor</a>
+            </div>
+          </div>
+          <div class="upgrade-container">
+            <div class="upgrade-img">
+              <img src="/images/upgrades/flame.jpg" alt="Flame Decals" />
+            </div>
+            <div class="upgrade-link">
+              <a href="/upgrades/flame">Flame Decals</a>
+            </div>
+          </div>
+          <div class="upgrade-container">
+            <div class="upgrade-img">
+              <img src="/images/upgrades/bumper_sticker.jpg" alt="Bumper Stickers" />
+            </div>
+            <div class="upgrade-link">
+              <a href="/upgrades/bumper">Bumper Stickers</a>
+            </div>
+          </div>
+          <div class="upgrade-container">
+            <div class="upgrade-img">
+              <img src="/images/upgrades/hub-cap.jpg" alt="Hub Caps" />
+            </div>
+            <div class="upgrade-link">
+              <a href="/upgrades/hubcaps">Hub Caps</a>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="reviews">
-        <h3><%= reviewsTitle %></h3>
+      </div>
+
+      <div class="reviews">
+        <h3>DMC Delorean Reviews</h3>
         <ul>
-            <% reviews.forEach(review => { %>
-                <li><%= review %></li>
-            <% }); %>
+          <li>"So fast it's almost like traveling in time." (4/5)</li>
+          <li>"Coolest ride on the road." (4/5)</li>
+          <li>"I'm feeling McFly!" (5/5)</li>
+          <li>"The most futuristic ride of our day." (4.5/5)</li>
+          <li>"80's livin and I love it!" (5/5)</li>
         </ul>
-    </div>
-</section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
