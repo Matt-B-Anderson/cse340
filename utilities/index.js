@@ -42,34 +42,31 @@ Util.buildClassificationGrid = async function (data) {
 				vehicle.inv_make +
 				" " +
 				vehicle.inv_model +
-				'details"><img src="' +
-				vehicle.inv_thumbnail +
-				'" alt="Image of ' +
-				vehicle.inv_make +
-				" " +
-				vehicle.inv_model +
-				' on CSE Motors" /></a>';
-			grid += '<div class="namePrice">';
-			grid += "<hr />";
-			grid += "<h2>";
+				' details">';
+
+			// IMAGE WRAPPER
+			grid += '<div class="inventory-image">';
 			grid +=
-				'<a href="../../inv/detail/' +
-				vehicle.inv_id +
-				'" title="View ' +
+				'<img src="' +
+				vehicle.inv_thumbnail +
+				'" ' +
+				'alt="Image of ' +
 				vehicle.inv_make +
 				" " +
 				vehicle.inv_model +
-				' details">' +
-				vehicle.inv_make +
-				" " +
-				vehicle.inv_model +
-				"</a>";
-			grid += "</h2>";
+				'">';
+			grid += "</div>";
+
+			// DETAILS WRAPPER
+			grid += '<div class="inventory-details">';
+			grid += "<h2>" + vehicle.inv_make + " " + vehicle.inv_model + "</h2>";
 			grid +=
 				"<span>$" +
 				new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
 				"</span>";
 			grid += "</div>";
+
+			grid += "</a>";
 			grid += "</li>";
 		});
 		grid += "</ul>";
