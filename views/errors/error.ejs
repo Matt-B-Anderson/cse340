@@ -1,7 +1,16 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else {
-  res.redirect('/')
-} %>
+<% } else { %>
+  <h1>Server Error</h1>
+<% } %>
 
-<% message %>
+<div class="error-content">
+    <p class="error-message">
+  <%= message || "Oops! Something went wrong. Please try again later." %>
+</p>
+
+<div class="error-actions">
+  <a href="/" class="btn btn-primary">Go Home</a>
+  <button onclick="history.back()" class="btn btn-secondary">Go Back</button>
+</div>
+</div>

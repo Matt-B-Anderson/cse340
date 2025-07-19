@@ -20,7 +20,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
 }
 
 header h1 {
@@ -29,11 +29,18 @@ header h1 {
     margin: 0;
 }
 
+h1,
+h2,
+h3 {
+    padding-left: 2rem;
+}
+
 .account a {
     color: var(--text);
     font-size: 0.9rem;
     text-decoration: none;
     font-weight: bold;
+    padding-right: 2rem;
 }
 
 nav {
@@ -58,9 +65,6 @@ nav a {
     font-weight: bold;
 }
 
-.welcome-text {
-    padding-left: .85rem;
-}
 
 .intro.hero {
     display: block;
@@ -140,6 +144,10 @@ nav a {
     padding-left: .85rem;
 }
 
+.reviews h3 {
+    padding: 0;
+}
+
 .upgrades .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -190,7 +198,7 @@ nav a {
 footer {
     text-align: start;
     color: var(--text);
-    padding: 1rem .85rem;
+    padding-left: 2rem;
     margin-top: 2rem;
 }
 
@@ -199,7 +207,7 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     list-style: none;
-    padding: 0;
+    padding-left: 2rem;
     margin: 2rem 0;
 }
 
@@ -257,11 +265,134 @@ footer {
     color: var(--text);
 }
 
-/* Optional: style the “no results” notice */
+.inv-detail {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding-left: 2rem;
+}
+
+.inv-gallery {
+    flex: 1;
+}
+
+.inv-main img {
+    width: 100%;
+    display: block;
+}
+
+.inv-thumbs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+
+.inv-thumbs li img {
+    width: 60px;
+    cursor: pointer;
+    display: block;
+}
+
+.inv-info {
+    flex: 1;
+}
+
+.inv-info h1 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.inv-price-block {
+    background: #eef6fa;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.inv-price-label {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.inv-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.inv-mileage {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.inv-specs {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.inv-specs li {
+    margin-bottom: 0.5rem;
+}
+
 .notice {
     font-style: italic;
     text-align: center;
     margin: 2rem 0;
+}
+
+.error-content {
+    max-width: 400px;
+    padding-left: 2rem;
+}
+
+.error-code {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    color: var(--tertiary-color, #c0392b);
+}
+
+
+.error-message {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark-grey, #303030);
+}
+
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-family: var(--font-body, Arial, sans-serif);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color, #007acc);
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background-color: var(--light-grey, #d0d0d0);
+    color: var(--dark-grey, #303030);
 }
 
 @media only screen and (max-width: 414px) {

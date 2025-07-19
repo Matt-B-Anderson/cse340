@@ -24,8 +24,6 @@ Util.getNav = async function (req, res, next) {
 	return list;
 };
 
-module.exports = Util;
-
 /* **************************************
  * Build the classification view HTML
  * ************************************ */
@@ -75,6 +73,63 @@ Util.buildClassificationGrid = async function (data) {
 	}
 	return grid;
 };
+/* **************************************
+ * Build the inventory view HTML
+ * ************************************ */
+Util.buildInventoryGrid = async function (data) {
+	let html = "";
+
+	if (data) {
+		html += `
+<section class="inv-detail">
+  <!-- left: gallery -->
+  <div class="inv-gallery">
+    <div class="inv-main">
+      <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
+    </div>
+    <ul class="inv-thumbs">
+      ${
+				data.inv_images
+					?.map(
+						(src) =>
+							`<li><img src="${src}" alt="${v.inv_make} ${v.inv_model}"></li>`
+					)
+					.join("") ?? ""
+			}
+    </ul>
+  </div>
+
+  <!-- right: info -->
+  <div class="inv-info">
+    <h1>${data.inv_year} ${data.inv_make} ${data.inv_model}</h1>
+
+    <div class="inv-price-block">
+      <div class="inv-price-label">
+        Price
+      </div>
+      <div class="inv-price">
+        $${new Intl.NumberFormat("en-US").format(data.inv_price)}
+      </div>
+      <div class="inv-mileage">
+        ${new Intl.NumberFormat("en-US").format(data.inv_miles)} miles
+      </div>
+    </div>
+
+    <ul class="inv-specs">
+      <li><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(
+				data.inv_miles
+			)}</li>
+      <li><strong>Ext. Color:</strong> ${data.inv_color}</li>
+    </ul>
+  </div>
+</section>
+`;
+	} else {
+		html = `<p class="notice">Sorry, no vehicle details available.</p>`;
+	}
+
+	return html;
+};
 
 /* ****************************************
  * Middleware For Handling Errors
@@ -83,3 +138,5 @@ Util.buildClassificationGrid = async function (data) {
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
 	Promise.resolve(fn(req, res, next)).catch(next);
+
+module.exports = Util;

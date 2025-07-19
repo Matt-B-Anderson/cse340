@@ -19,4 +19,26 @@ invCont.buildByClassificationId = async function (req, res, next) {
 	});
 };
 
+/* ***************************
+ *  Build inventory by inventory view
+ * ************************** */
+invCont.buildByInventoryId = async function (req, res, next) {
+	const inventory_id = req.params.inventoryId;
+	const data = await invModel.getInventoryByInventoryId(inventory_id);
+	if (!data) {
+		const err = new Error(
+			`No vehicles found for inventory Id of ${inventory_id}`
+		);
+		err.status = 500;
+		throw err;
+	}
+	const html = await utilities.buildInventoryGrid(data);
+	let nav = await utilities.getNav();
+	const className = data.inv_make;
+	res.render("./inventory/inventoryItem", {
+		title: className,
+		nav,
+		html,
+	});
+};
 module.exports = invCont;
