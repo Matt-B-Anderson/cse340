@@ -41,9 +41,10 @@ app.use(async (req, res, next) => {
  *************************/
 app.use(async (err, req, res, next) => {
 	let nav = await utilities.getNav();
-	console.error(`Error at: "${req.originalUrl}": ${err.message}`);
-	res.status(err.status || 500).render("errors/error", {
-		title: err.status,
+	const status = err.status || err.statusCode || 500;
+	console.error(`Error at: "${req.originalUrl}": ${err.message} ${status}`);
+	res.status(status).render("errors/error", {
+		title: status,
 		nav,
 		message: err.message,
 	});
