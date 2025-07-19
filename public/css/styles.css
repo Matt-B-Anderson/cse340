@@ -415,4 +415,9 @@ footer {
         max-width: 90%;
     }
 
+    .inv-detail {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
