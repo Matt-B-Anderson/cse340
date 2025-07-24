@@ -398,7 +398,7 @@ footer {
     justify-self: center;
     border: none;
     border-radius: 8px;
-    height: 250px;
+    height: auto;
     width: 500px;
     background-color: var(--nav-bg);
     display: flex;
@@ -415,7 +415,7 @@ footer {
     height: auto;
     color: white;
     gap: 8px;
-    padding-bottom: 1rem;
+    padding: 1rem 0 1rem 0;
 }
 
 .login-form label {
@@ -502,6 +502,25 @@ footer {
     align-self: center;
     background-color: var(--light-grey, #d0d0d0);
     margin-top: 1rem;
+}
+
+input {
+  padding-right: 2.5em;
+  background-origin: content-box;
+  background-size: 1.25em 1.25em;
+}
+
+input:required:invalid,
+input:focus:invalid {
+  background-image: url('/images/invalid.png');
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
+}
+
+input:required:valid {
+  background-image: url('/images/valid.png');
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
 }
 
 @media only screen and (max-width: 414px) {
