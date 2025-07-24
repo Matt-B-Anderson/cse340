@@ -451,6 +451,58 @@ footer {
     text-decoration: underline;
 }
 
+
+.register-form-container {
+    justify-self: center;
+    border: none;
+    border-radius: 8px;
+    height: 450px;
+    width: 350px;
+    background-color: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form-container h2 {
+    padding: 0;
+    text-align: center;
+    color: white;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    height: auto;
+    color: white;
+    gap: 8px;
+    padding-bottom: 1rem;
+}
+
+.register-form label {
+    font-size: 1rem;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.register-form input {
+    padding: 1rem;
+    width: auto;
+    height: 5px;
+}
+
+.register-submit {
+    border: none;
+    border-radius: 12px;
+    width: 150px;
+    height: 30px;
+    align-self: center;
+    background-color: var(--light-grey, #d0d0d0);
+}
+
 @media only screen and (max-width: 414px) {
     nav ul {
         flex-direction: row;

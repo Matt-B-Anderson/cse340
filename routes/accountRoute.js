@@ -7,7 +7,7 @@ const utilities = require("../utilities/index");
 // Route to build an account view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
-router.get("/register", utilities.handleErrors(accountController.buildRegistration));
+router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
 
 module.exports = router;
