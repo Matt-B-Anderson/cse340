@@ -456,7 +456,7 @@ footer {
     justify-self: center;
     border: none;
     border-radius: 8px;
-    height: 450px;
+    height: auto;
     width: 350px;
     background-color: var(--nav-bg);
     display: flex;
@@ -521,6 +521,10 @@ input:required:valid {
   background-image: url('/images/valid.png');
   background-repeat: no-repeat;
   background-position: right 0.5em center;
+}
+
+.notice ul, li {
+    list-style: none;
 }
 
 @media only screen and (max-width: 414px) {
