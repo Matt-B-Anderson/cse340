@@ -8,15 +8,27 @@
 
 <section class="register-form-container">
   <h2><%= title %></h2>
-    <form class="register-form" action="submit">
-        <label for="fname">First name:</label>
-        <input type="text" name="fname" id="fname">
-        <label for="lname">Last name:</label>
-        <input type="text" name="lname" id="lname/">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
-        <button class="register-submit" id="register-submit" type="submit">Register</button>
-    </form>
+    <form class="register-form" action="#" method="post">
+  <label for="fname">First name:<span style="color: red">*</span></label>
+  <input type="text" name="fname" id="fname" required>
+
+  <label for="lname">Last name:<span style="color: red">*</span></label>
+  <input type="text" name="lname" id="lname" required>
+
+  <label for="email">Email:<span style="color: red">*</span></label>
+  <input type="email" name="email" id="email" required>
+
+  <label for="password">Password:<span style="color: red">*</span></label>
+  <input
+    type="password"
+    name="password"
+    id="password"
+    required
+    minlength="12"
+    pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}"
+    title="Password must be at least 12 characters long and include at least 1 uppercase letter, 1 number, and 1 special character"
+  >
+
+  <button class="register-submit" id="register-submit" type="submit">Register</button>
+</form>
 </section>

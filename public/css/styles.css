@@ -501,6 +501,7 @@ footer {
     height: 30px;
     align-self: center;
     background-color: var(--light-grey, #d0d0d0);
+    margin-top: 1rem;
 }
 
 @media only screen and (max-width: 414px) {
