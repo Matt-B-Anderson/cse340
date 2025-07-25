@@ -6,16 +6,18 @@
 
 <% messages %>
 
+<% errors %>
+
 <section class="login-form-container">
-    <form class="login-form" action="#" method="post">
-        <label for="email">Email:<span style="color: red">*</span></label>
-        <input type="email" name="email" id="email" required placeholder="Enter a valid email address">
-        <label for="password">Password:<span style="color: red">*</span></label>
+    <form class="login-form" action="/account/login" method="post">
+        <label for="loginEmail">Email:<span style="color: red">*</span></label>
+        <input type="email" name="login_email" id="loginEmail" required placeholder="Enter a valid email address">
+        <label for="loginPassword">Password:<span style="color: red">*</span></label>
         <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
         <input
           type="password"
-          name="password"
-          id="password"
+          name="login_password"
+          id="loginPassword"
           required
           minlength="12"
           pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}"

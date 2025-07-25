@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
+const classificationModel = require("../models/classification-model");
 
 const invCont = {};
 
@@ -41,4 +42,98 @@ invCont.buildByInventoryId = async function (req, res, next) {
 		html,
 	});
 };
+
+/* ****************************************
+*  Deliver management view
+* *************************************** */
+invCont.buildManagement = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const message = req.flash("notice, 'test' ")
+  res.render("./inventory/management", {
+	title: "Inventory Management",
+	nav,
+	messages: message
+  })
+}
+
+/* ****************************************
+*  Add a classification
+* *************************************** */
+invCont.addClassification = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const { classification_name} = req.body
+
+  const classResult = await classificationModel.addClassification(
+	classification_name
+  )
+
+  if (classResult) {
+	req.flash(
+	  "notice",
+	  `Congratulations, you\'ve added a new classification ${classification_name}.`
+	)
+	res.status(201).render("inv/", {
+	  title: "Inventory Management",
+	  nav,
+	})
+  } else {
+	req.flash("notice", "Sorry, adding a new classification failed.")
+	res.status(501).render("inv/add-classification", {
+	  title: "Add Classification",
+	  nav,
+	})
+  }
+  
+}
+
+/* ****************************************
+*  Add a new inventory item
+* *************************************** */
+invCont.addInventoryItem = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const { 
+		inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_name
+   } = req.body
+
+  const invResult = await invModel.addInventoryItem(
+		inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_name
+  )
+
+  if (invResult) {
+	req.flash(
+	  "notice",
+	  `Congratulations, you\'ve added a new inventory item ${inv_model} to the ${classification_name} classification.`
+	)
+	res.status(201).render("inv/", {
+	  title: "Inventory Management",
+	  nav,
+	})
+  } else {
+	req.flash("notice", "Sorry, the new inventory item creation failed.")
+	res.status(501).render("inv/inventory-add", {
+	  title: "Add Inventory Item",
+	  nav,
+	})
+  }
+  
+}
+
 module.exports = invCont;

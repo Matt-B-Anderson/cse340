@@ -1,0 +1,36 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% messages %>
+
+<% errors %>
+
+<section class="add-inventory-item-form-container">
+    <form class="add-inventory-item-form" action="#" method="post">
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <label for="inv_make">Inventory Make:<span style="color: red">*</span></label> 
+        <input type="text" name="inv_make" id="inv_make" required>
+        <% classificationList %>
+        <button class="add-inventory-item-submit" id="add-inventory-item-submit" type="submit">Add Inventory Item</button>
+    </form>
+</section>

@@ -31,8 +31,72 @@ async function getInventoryByInventoryId(inv_id) {
 	return data.rows[0];
 }
 
+async function addInventoryItem(
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_name
+) {
+  try {
+    const classRes = await pool.query(
+      `SELECT classification_id
+         FROM classification
+        WHERE classification_name = $1`,
+      [classification_name]
+    );
+
+    if (classRes.rowCount === 0) {
+      throw new Error(`Unknown classification: ${classification_name}`);
+    }
+
+    const classification_id = classRes.rows[0].classification_id;
+
+    const sql = `
+      INSERT INTO inventory
+        (inv_make,
+         inv_model,
+         inv_year,
+         inv_description,
+         inv_image,
+         inv_thumbnail,
+         inv_price,
+         inv_miles,
+         inv_color,
+         classification_id)
+      VALUES
+        ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+      RETURNING *;
+    `;
+
+    const insertRes = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+    ]);
+
+    return insertRes.rows[0];
+
+  } catch (err) {
+    return err.message
+  }
+}
+
 module.exports = {
 	getClassifications,
 	getInventoryByClassificationId,
 	getInventoryByInventoryId,
+	addInventoryItem
 };
