@@ -4,6 +4,16 @@
   res.redirect('/')
 } %>
 
-<%# messages() %>
+<% if (messages && messages.length) { %>
+  <div class="flash"><%= messages[0] %></div>
+<% } %>
+
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(e => { %>
+      <li><%= e.msg || e %></li>
+    <% }) %>
+  </ul>
+<% } %>
 
 <%- html %>

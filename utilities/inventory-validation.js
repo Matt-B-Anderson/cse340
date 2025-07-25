@@ -79,7 +79,7 @@ validate.invRules = () => {
             .withMessage("Inventory color must be a string."),
 
         // classification_name is required and must be selected
-        body("classification_name")
+        body("classification_id")
             .trim()
             .notEmpty()
             .withMessage("A classification name must be selected")
@@ -100,16 +100,17 @@ validate.checkInvData = async (req, res, next) => {
         inv_price,
         inv_miles,
         inv_color,
-        classification_name 
 } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
-        res.render("account/register", {
+        const classificationList = await utilities.buildClassificationList();
+        res.render("inventory/add-inventory", {
             errors,
             title: "Registration",
             nav,
+            classificationList,
             inv_make,
             inv_model,
             inv_year,
@@ -119,7 +120,6 @@ validate.checkInvData = async (req, res, next) => {
             inv_price,
             inv_miles,
             inv_color,
-            classification_name
         })
         return
     }

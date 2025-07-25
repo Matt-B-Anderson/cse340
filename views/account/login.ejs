@@ -4,9 +4,17 @@
   res.redirect('/')
 } %>
 
-<% messages %>
+<% if (messages && messages.length) { %>
+  <div class="flash"><%= messages[0] %></div>
+<% } %>
 
-<% errors %>
+<% if (errors && errors.length) { %>
+  <ul class="errors">
+    <% errors.forEach(e => { %>
+      <li><%= e.msg || e %></li>
+    <% }) %>
+  </ul>
+<% } %>
 
 <section class="login-form-container">
     <form class="login-form" action="/account/login" method="post">

@@ -23,8 +23,18 @@ router.get(
 	"/", utilities.handleErrors(invController.buildManagement)
 );
 
+// Route to build classification add view
+router.get(
+	"/add-classification", utilities.handleErrors(invController.buildAddClassificationView)
+);
+
+// Route to build inventory add view
+router.get(
+	"/add-inventory", utilities.handleErrors(invController.buildAddInventoryItemView)
+);
+
 // Route to add classification
-router.post("/classification-add",
+router.post("/add-classification",
 	classValidate.classificationRules(),
 	classValidate.checkClassificationData,
 	utilities.handleErrors(invController.addClassification)
@@ -32,7 +42,7 @@ router.post("/classification-add",
 
 
 // Route to add new inventory item
-router.post("/inventory-add",
+router.post("/add-inventory",
 	invValidate.invRules(),
 	invValidate.checkInvData,
 	utilities.handleErrors(invController.addInventoryItem)

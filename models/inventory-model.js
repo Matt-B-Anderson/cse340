@@ -41,22 +41,9 @@ async function addInventoryItem(
   inv_price,
   inv_miles,
   inv_color,
-  classification_name
+  classification_id
 ) {
   try {
-    const classRes = await pool.query(
-      `SELECT classification_id
-         FROM classification
-        WHERE classification_name = $1`,
-      [classification_name]
-    );
-
-    if (classRes.rowCount === 0) {
-      throw new Error(`Unknown classification: ${classification_name}`);
-    }
-
-    const classification_id = classRes.rows[0].classification_id;
-
     const sql = `
       INSERT INTO inventory
         (inv_make,
@@ -90,7 +77,8 @@ async function addInventoryItem(
     return insertRes.rows[0];
 
   } catch (err) {
-    return err.message
+    console.error("Model.addInventoryItem error:", err);
+    throw err;
   }
 }
 

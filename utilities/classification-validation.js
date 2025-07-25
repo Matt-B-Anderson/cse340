@@ -1,6 +1,7 @@
 const utilities = require(".")
   const { body, validationResult } = require("express-validator");
   const validate = {}
+  const classificationModel = require("../models/classification-model")
 
   /*  **********************************
   *  Classification Data Validation Rules
@@ -16,7 +17,13 @@ const utilities = require(".")
       .withMessage("Classification name must be at least 1 character")
       .isAlphanumeric()
       .withMessage("Classification name may only contain letters and numbers (no spaces or special characters)")
-      .escape(),
+      .custom(async (classification_name) => {
+                      const classificationExists = await classificationModel.checkExistingClassification(classification_name)
+                      if (classificationExists) {
+                          throw new Error("Classification exists. Please enter in a different classification")
+                      }
+                  })
+      .escape()
     ];
   };
 
@@ -29,9 +36,9 @@ validate.checkClassificationData = async (req, res, next) => {
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
-    res.render("inv/add-classification", {
+    res.render("inventory/add-classification", {
       errors,
-      title: "Add Classification",
+      title: "Add a Classification",
       nav,
       classification_name
     })

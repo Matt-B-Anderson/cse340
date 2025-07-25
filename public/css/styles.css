@@ -504,6 +504,132 @@ footer {
     margin-top: 1rem;
 }
 
+.add-classification-form-container {
+    justify-self: center;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: 350px;
+    background-color: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-classification-form-container h2 {
+    padding: 0;
+    text-align: center;
+    color: white;
+}
+
+.add-classification-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    height: auto;
+    color: white;
+    gap: 8px;
+    padding-bottom: 1rem;
+}
+
+.add-classification-form label {
+    font-size: 1rem;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.add-classification-form input {
+    padding: 1rem;
+    width: auto;
+    height: 5px;
+}
+
+.add-classification-submit {
+    border: none;
+    border-radius: 12px;
+    width: 150px;
+    height: 30px;
+    align-self: center;
+    background-color: var(--light-grey, #d0d0d0);
+    margin-top: 1rem;
+}
+
+.add-inventory-item-form-container {
+    justify-self: center;
+    border: none;
+    border-radius: 8px;
+    height: auto;
+    width: auto;
+    background-color: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-inventory-item-form-container h2 {
+    padding: 0;
+    text-align: center;
+    color: white;
+}
+
+.add-inventory-item-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;  
+    width: 95%;
+    height: auto;
+    color: white;
+    gap: 8px;
+    padding-bottom: 1rem;
+}
+
+.add-inventory-item-form .odd {
+    grid-column: 1;
+}
+
+.add-inventory-item-form .even {
+    grid-column: 2;
+}
+
+.add-inventory-item-form .odd,
+.add-inventory-item-form .even {
+  display: flex;
+  flex-direction: column;    /* stack label over input */
+  align-items: center;       /* center horizontally */
+  justify-content: center;
+  padding: 0.5rem;
+  width: auto;
+}
+
+.add-inventory-item-form label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.add-inventory-item-form input {
+    padding: 1rem;
+    height: 5px;
+}
+
+.add-inventory-item-form select {
+    padding: 0.75rem;
+}
+
+.add-inventory-item-submit {
+    border: none;
+    border-radius: 12px;
+    width: 150px;
+    height: 30px;
+    background-color: var(--light-grey, #d0d0d0);
+    margin-top: 1rem;
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
 input {
   padding-right: 2.5em;
   background-origin: content-box;

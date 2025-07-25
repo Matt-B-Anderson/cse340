@@ -1,43 +1,66 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else {
-  res.redirect('/')
-} %>
-
-<% messages %>
-
-<% if (errors) { %>
-  <ul class="notice">
- <% errors.array().forEach(error => { %>
-   <li><%= error.msg %></li>
-<%  }) %>
- </ul>
+<% } else { res.redirect('/') } %> <% messages %> <% if (errors) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
 <% } %>
-
 
 <section class="register-form-container">
   <h2><%= title %></h2>
-    <form class="register-form" action="/account/register" method="post">
-  <label for="accountFirstname">First name:<span style="color: red">*</span></label>
-  <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
+  <form class="register-form" action="/account/register" method="post">
+    <label for="accountFirstname"
+      >First name:<span style="color: red">*</span></label
+    >
+    <input
+      type="text"
+      name="account_firstname"
+      id="accountFirstname"
+      required
+      value="<%= locals.account_firstname %>"
+    />
 
-  <label for="accountLastname">Last name:<span style="color: red">*</span></label>
-  <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>">
+    <label for="accountLastname"
+      >Last name:<span style="color: red">*</span></label
+    >
+    <input
+      type="text"
+      name="account_lastname"
+      id="accountLastname"
+      required
+      value="<%= locals.account_lastname %>"
+    />
 
-  <label for="accountEmail">Email:<span style="color: red">*</span></label>
-  <input type="email" name="account_email" id="accountEmail" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
+    <label for="accountEmail">Email:<span style="color: red">*</span></label>
+    <input
+      type="email"
+      name="account_email"
+      id="accountEmail"
+      required
+      placeholder="Enter a valid email address"
+      value="<%= locals.account_email %>"
+    />
 
-  <label for="accountPassword">Password:<span style="color: red">*</span></label>
-  <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
-  <input
-    type="password"
-    name="account_password"
-    id="accountPassword"
-    required
-    minlength="12"
-    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$"
-  >
+    <label for="accountPassword"
+      >Password:<span style="color: red">*</span></label
+    >
+    <span
+      >Passwords must be at least 12 characters and contain at least 1 number, 1
+      capital letter and 1 special character</span
+    >
+    <input
+      type="password"
+      name="account_password"
+      id="accountPassword"
+      required
+      minlength="12"
+      pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$"
+    />
 
-  <button class="register-submit" id="register-submit" type="submit">Register</button>
-</form>
+    <button class="register-submit" id="register-submit" type="submit">
+      Register
+    </button>
+  </form>
 </section>
