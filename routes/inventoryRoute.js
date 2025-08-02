@@ -19,33 +19,51 @@ router.get(
 );
 
 // Route to build inventory management view
-router.get(
-	"/", utilities.handleErrors(invController.buildManagement)
-);
+router.get("/", utilities.handleErrors(invController.buildManagement));
 
 // Route to build classification add view
 router.get(
-	"/add-classification", utilities.handleErrors(invController.buildAddClassificationView)
+	"/add-classification",
+	utilities.handleErrors(invController.buildAddClassificationView)
 );
 
 // Route to build inventory add view
 router.get(
-	"/add-inventory", utilities.handleErrors(invController.buildAddInventoryItemView)
+	"/add-inventory",
+	utilities.handleErrors(invController.buildAddInventoryItemView)
 );
 
 // Route to add classification
-router.post("/add-classification",
+router.post(
+	"/add-classification",
 	classValidate.classificationRules(),
 	classValidate.checkClassificationData,
 	utilities.handleErrors(invController.addClassification)
 );
 
-
 // Route to add new inventory item
-router.post("/add-inventory",
+router.post(
+	"/add-inventory",
 	invValidate.invRules(),
 	invValidate.checkInvData,
 	utilities.handleErrors(invController.addInventoryItem)
+);
+
+router.get(
+	"/getInventory/:classification_id",
+	utilities.handleErrors(invController.getInventoryJSON)
+);
+
+router.get(
+	"/edit/:inventory_id",
+	utilities.handleErrors(invController.buildEditInventory)
+);
+
+router.post(
+	"/update/",
+	invValidate.invRules(),
+	invValidate.checkUpdateData,
+	utilities.handleErrors(invController.updateInventory)
 );
 
 module.exports = router;

@@ -32,19 +32,19 @@ async function getInventoryByInventoryId(inv_id) {
 }
 
 async function addInventoryItem(
-  inv_make,
-  inv_model,
-  inv_year,
-  inv_description,
-  inv_image,
-  inv_thumbnail,
-  inv_price,
-  inv_miles,
-  inv_color,
-  classification_id
+	inv_make,
+	inv_model,
+	inv_year,
+	inv_description,
+	inv_image,
+	inv_thumbnail,
+	inv_price,
+	inv_miles,
+	inv_color,
+	classification_id
 ) {
-  try {
-    const sql = `
+	try {
+		const sql = `
       INSERT INTO inventory
         (inv_make,
          inv_model,
@@ -61,30 +61,68 @@ async function addInventoryItem(
       RETURNING *;
     `;
 
-    const insertRes = await pool.query(sql, [
-      inv_make,
-      inv_model,
-      inv_year,
-      inv_description,
-      inv_image,
-      inv_thumbnail,
-      inv_price,
-      inv_miles,
-      inv_color,
-      classification_id
-    ]);
+		const insertRes = await pool.query(sql, [
+			inv_make,
+			inv_model,
+			inv_year,
+			inv_description,
+			inv_image,
+			inv_thumbnail,
+			inv_price,
+			inv_miles,
+			inv_color,
+			classification_id,
+		]);
 
-    return insertRes.rows[0];
+		return insertRes.rows[0];
+	} catch (err) {
+		console.error("Model.addInventoryItem error:", err);
+		throw err;
+	}
+}
 
-  } catch (err) {
-    console.error("Model.addInventoryItem error:", err);
-    throw err;
-  }
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+	inv_id,
+	inv_make,
+	inv_model,
+	inv_description,
+	inv_image,
+	inv_thumbnail,
+	inv_price,
+	inv_year,
+	inv_miles,
+	inv_color,
+	classification_id
+) {
+	try {
+		const sql =
+			"UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *";
+		const data = await pool.query(sql, [
+			inv_make,
+			inv_model,
+			inv_description,
+			inv_image,
+			inv_thumbnail,
+			inv_price,
+			inv_year,
+			inv_miles,
+			inv_color,
+			classification_id,
+			inv_id,
+		]);
+		return data.rows[0];
+	} catch (error) {
+		console.error("model error: " + error);
+	}
 }
 
 module.exports = {
 	getClassifications,
 	getInventoryByClassificationId,
 	getInventoryByInventoryId,
-	addInventoryItem
+	addInventoryItem,
+	updateInventory,
 };

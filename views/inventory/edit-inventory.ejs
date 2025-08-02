@@ -1,0 +1,63 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <% if (messages && messages.length) { %>
+<div class="flash"><%= messages[0] %></div>
+<% } %> <% if (errors && errors.length) { %>
+<ul class="errors">
+  <% errors.forEach(e => { %>
+  <li><%= e.msg || e %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<section class="add-inventory-item-form-container">
+  <form class="add-inventory-item-form" action="/inv/update" method="post" id="updateForm">
+    <div class="odd">
+      <label for="inv_make">Inventory Make:<span style="color: white">*</span></label>
+      <input type="text" name="inv_make" id="inv_make" required value="<%= locals.inv_make %>" />
+    </div>
+    <div class="even">
+      <label for="inv_model">Inventory Model:<span style="color: white">*</span></label>
+      <input type="text" name="inv_model" id="inv_model" required value="<%= locals.inv_model %>" />
+    </div>
+    <div class="odd">
+      <label for="inv_year">Inventory Year:<span style="color: white">*</span></label>
+      <input type="text" name="inv_year" id="inv_year" required value="<%= locals.inv_year %>" />
+    </div>
+    <div class="even">
+      <label for="inv_description">Inventory Description:<span style="color: white">*</span></label>
+      <input type="text" name="inv_description" id="inv_description" required value="<%= locals.inv_description %>" />
+    </div>
+    <div class="odd">
+      <label for="inv_image">Inventory Image:<span style="color: white">*</span></label>
+      <input type="text" name="inv_image" id="inv_image" required value="<%= locals.inv_image %>" />
+    </div>
+    <div class="even">
+      <label for="inv_thumbnail">Inventory Thumbnail:<span style="color: white">*</span></label>
+      <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail %>" />
+    </div>
+    <div class="odd">
+      <label for="inv_price">Inventory Price:<span style="color: white">*</span></label>
+      <input type="text" name="inv_price" id="inv_price" required value="<%= locals.inv_price %>" />
+    </div>
+    <div class="even">
+      <label for="inv_miles">Inventory Miles:<span style="color: white">*</span></label>
+      <input type="text" name="inv_miles" id="inv_miles" required value="<%= locals.inv_miles %>" />
+    </div>
+    <div class="odd">
+      <label for="inv_color">Inventory Color:<span style="color: white">*</span></label>
+      <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>" />
+    </div>
+    <div class="even">
+      <label for="classificationList">Select Classification:<span style="color: white">*</span></label>
+      <%- classificationSelect %>
+    </div>
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+		locals.inv_id %>" <% } %> />
+    <button class="add-inventory-item-submit" id="add-inventory-item-submit" type="submit">
+      Update Vehicle
+    </button>
+  </form>
+</section>
+
+<script src="../../js/inv-update.js"></script>

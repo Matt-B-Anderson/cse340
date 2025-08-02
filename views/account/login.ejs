@@ -4,7 +4,7 @@
 <div class="flash"><%= messages[0] %></div>
 <% } %> <% if (errors && errors.length) { %>
 <ul class="errors">
-	<% errors.forEach(e => { %>
+	<% errors?.forEach(e => { %>
 	<li><%= e.msg || e %></li>
 	<% }) %>
 </ul>
@@ -12,15 +12,15 @@
 
 <section class="login-form-container">
 	<form class="login-form" action="/account/login" method="post">
-		<label for="loginEmail">Email:<span style="color: white">*</span></label>
+		<label for="account_email">Email:<span style="color: white">*</span></label>
 		<input
 			type="email"
-			name="login_email"
-			id="loginEmail"
+			name="account_email"
+			id="account_email"
 			required
 			placeholder="Enter a valid email address"
 		/>
-		<label for="loginPassword"
+		<label for="account_password"
 			>Password:<span style="color: white">*</span></label
 		>
 		<span
@@ -29,11 +29,11 @@
 		>
 		<input
 			type="password"
-			name="login_password"
-			id="loginPassword"
+			name="account_password"
+			id="account_password"
 			required
 			minlength="12"
-			pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}"
+			pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$"
 		/>
 		<button class="login-submit" id="login-submit" type="submit">Login</button>
 	</form>

@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const Util = {};
 
 /* ************************
@@ -88,12 +90,13 @@ Util.buildInventoryGrid = async function (data) {
       <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">
     </div>
     <ul class="inv-thumbs">
-      ${data.inv_images
-				?.map(
-					(src) =>
-						`<li><img src="${src}" alt="${v.inv_make} ${v.inv_model}"></li>`
-				)
-				.join("") ?? ""
+      ${
+				data.inv_images
+					?.map(
+						(src) =>
+							`<li><img src="${src}" alt="${v.inv_make} ${v.inv_model}"></li>`
+					)
+					.join("") ?? ""
 			}
     </ul>
   </div>
@@ -131,22 +134,34 @@ Util.buildInventoryGrid = async function (data) {
 };
 
 Util.buildClassificationList = async function (classification_id = null) {
-	let data = await invModel.getClassifications()
+	let data = await invModel.getClassifications();
 	let classificationList =
-		'<select name="classification_id" id="classificationList" required>'
-	classificationList += "<option value=''>Choose a Classification</option>"
+		'<select name="classification_id" id="classificationList" required>';
+	classificationList += "<option value=''>Choose a Classification</option>";
 	data.rows.forEach((row) => {
-		classificationList += '<option value="' + row.classification_id + '"'
+		classificationList += '<option value="' + row.classification_id + '"';
 		if (
 			classification_id != null &&
 			row.classification_id == classification_id
 		) {
-			classificationList += " selected "
+			classificationList += " selected ";
 		}
-		classificationList += ">" + row.classification_name + "</option>"
-	})
-	classificationList += "</select>"
-	return classificationList
+		classificationList += ">" + row.classification_name + "</option>";
+	});
+	classificationList += "</select>";
+	return classificationList;
+};
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+	if (res.locals.loggedin) {
+		next();
+	} else {
+		req.flash("notice", "Please log in.");
+		return res.redirect("/account/login");
+	}
 };
 
 /* ****************************************
@@ -156,5 +171,29 @@ Util.buildClassificationList = async function (classification_id = null) {
  **************************************** */
 Util.handleErrors = (fn) => (req, res, next) =>
 	Promise.resolve(fn(req, res, next)).catch(next);
+
+/* ****************************************
+ * Middleware to check token validity
+ **************************************** */
+Util.checkJWTToken = (req, res, next) => {
+	if (req.cookies.jwt) {
+		jwt.verify(
+			req.cookies.jwt,
+			process.env.ACCESS_TOKEN_SECRET,
+			function (err, accountData) {
+				if (err) {
+					req.flash("Please log in");
+					res.clearCookie("jwt");
+					return res.redirect("/account/login");
+				}
+				res.locals.accountData = accountData;
+				res.locals.loggedin = 1;
+				next();
+			}
+		);
+	} else {
+		next();
+	}
+};
 
 module.exports = Util;
