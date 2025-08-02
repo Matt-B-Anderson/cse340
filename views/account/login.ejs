@@ -1,36 +1,43 @@
 <% if (title) { %>
 <h1><%= title %></h1>
-<% } else {
-  res.redirect('/')
-} %>
-
-<% if (messages && messages.length) { %>
-  <div class="flash"><%= messages[0] %></div>
-<% } %>
-
-<% if (errors && errors.length) { %>
-  <ul class="errors">
-    <% errors.forEach(e => { %>
-      <li><%= e.msg || e %></li>
-    <% }) %>
-  </ul>
+<% } else { res.redirect('/') } %> <% if (messages && messages.length) { %>
+<div class="flash"><%= messages[0] %></div>
+<% } %> <% if (errors && errors.length) { %>
+<ul class="errors">
+	<% errors.forEach(e => { %>
+	<li><%= e.msg || e %></li>
+	<% }) %>
+</ul>
 <% } %>
 
 <section class="login-form-container">
-    <form class="login-form" action="/account/login" method="post">
-        <label for="loginEmail">Email:<span style="color: red">*</span></label>
-        <input type="email" name="login_email" id="loginEmail" required placeholder="Enter a valid email address">
-        <label for="loginPassword">Password:<span style="color: red">*</span></label>
-        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
-        <input
-          type="password"
-          name="login_password"
-          id="loginPassword"
-          required
-          minlength="12"
-          pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}"
-        >
-        <button class="login-submit" id="login-submit" type="submit">Login</button>
-    </form>
-    <p>No account? <a class="register-link" href="/account/register">Sign-up</a></p>
+	<form class="login-form" action="/account/login" method="post">
+		<label for="loginEmail">Email:<span style="color: white">*</span></label>
+		<input
+			type="email"
+			name="login_email"
+			id="loginEmail"
+			required
+			placeholder="Enter a valid email address"
+		/>
+		<label for="loginPassword"
+			>Password:<span style="color: white">*</span></label
+		>
+		<span
+			>Passwords must be at least 12 characters and contain at least 1 number, 1
+			capital letter and 1 special character</span
+		>
+		<input
+			type="password"
+			name="login_password"
+			id="loginPassword"
+			required
+			minlength="12"
+			pattern="(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{12,}"
+		/>
+		<button class="login-submit" id="login-submit" type="submit">Login</button>
+	</form>
+	<p>
+		No account? <a class="register-link" href="/account/register">Sign-up</a>
+	</p>
 </section>
