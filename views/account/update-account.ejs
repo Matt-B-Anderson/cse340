@@ -1,0 +1,52 @@
+<h1><%= title %></h1>
+
+<% if (errors.length) { %>
+<ul class="errors">
+  <% errors.forEach(e => { %><li><%= e %></li><% }) %>
+</ul>
+<% } %>
+<% if (messages.length) { %>
+<ul class="messages">
+  <% messages.forEach(m => { %><li><%= m %></li><% }) %>
+</ul>
+<% } %>
+<section class="account-update">
+  <form class="update-form-container" action="/account/update/" method="POST">
+    <h2>Update Account Info</h2>
+    <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%=
+		locals.account_id %>" <% } %> />
+    <div class="odd">
+        <label>First Name
+      <input type="text" name="account_firstname" value="<%= locals.account_firstname %>" required>
+    </label>
+    </div>
+    <div class="even">
+        <label>Last Name
+      <input type="text" name="account_lastname" value="<%= locals.account_lastname %>" required>
+    </label>
+    </div>
+    <div class="odd">
+        <label>Email
+      <input type="email" name="account_email" value="<%= locals.account_email %>" required>
+    </label>
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+
+  <hr>
+
+  
+  <form class="update-form-container" action="/account/update-password/" method="POST">
+    <h2>Update Account password</h2>
+    <div class="odd">
+        <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%=
+		locals.account_id %>" <% } %> />
+    <p>Enter a new password: </p>
+    <label for="accountPassword">Password:</span></label>
+    <input type="password" name="account_password" id="accountPassword" required minlength="12" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{12,}$" />
+    </div>
+    <span>Passwords must be at least 12 characters and contain at least 1 number, 1
+      capital letter and 1 special character</span>
+    <button type="submit">Change Password</button>
+  </form>
+</section>

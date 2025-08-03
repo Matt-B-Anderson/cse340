@@ -103,6 +103,36 @@ validate.loginRules = () => {
 	];
 };
 
+validate.accountUpdateRules = () => {
+    return [
+        body('account_firstname').trim().notEmpty(),
+        body('account_lastname').trim().notEmpty(),
+        body('account_email').isEmail().bail()
+        .custom(async (email, { req }) => {
+        if (email !== req.body.original_email) {
+            const exists = await Account.getByEmail(email);
+        if (exists) throw new Error('Email already in use');
+        }
+        }),
+    ]
+}
+
+validate.passwordRules = () => {
+    return [
+        body("account_password")
+			.trim()
+			.notEmpty()
+			.isStrongPassword({
+				minLength: 12,
+				minLowercase: 1,
+				minUppercase: 1,
+				minNumbers: 1,
+				minSymbols: 1,
+			})
+			.withMessage("Invalid password."),
+    ]
+}
+
 /* ******************************
  * Check data and return errors or continue to login
  * ***************************** */

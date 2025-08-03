@@ -602,6 +602,23 @@ a {
     align-items: center;
 }
 
+.update-form-container {
+    padding: 1rem;
+    justify-self: center;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.update-form-container p, label, h2, span {
+    color: white;
+}
+
 .add-inventory-item-form-container h2 {
     padding: 0;
     text-align: center;
@@ -754,6 +771,12 @@ noscript {
     cursor: pointer;
     margin-bottom: 1rem;
     width: 15rem;
+}
+
+.link a {
+    color: var(--nav-bg);
+    padding-left: 2rem;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 414px) {

@@ -4,8 +4,7 @@ const router = new express.Router();
 const invController = require("../controllers/inventoryController");
 const utilities = require("../utilities/index");
 const classValidate = require("../utilities/classification-validation");
-const invValidate = require("../utilities/inventory-validation");
-
+const invValidate = require("../utilities/inventory-validation");''
 // Route to build inventory by classification view
 router.get(
 	"/type/:classificationId",
@@ -19,23 +18,28 @@ router.get(
 );
 
 // Route to build inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/", 
+   utilities.requireRole(['Employee','Admin']),
+    utilities.handleErrors(invController.buildManagement));
 
 // Route to build classification add view
 router.get(
 	"/add-classification",
+   utilities.requireRole(['Employee','Admin']),
 	utilities.handleErrors(invController.buildAddClassificationView)
 );
 
 // Route to build inventory add view
 router.get(
 	"/add-inventory",
+   utilities.requireRole(['Employee','Admin']),
 	utilities.handleErrors(invController.buildAddInventoryItemView)
 );
 
 // Route to add classification
 router.post(
 	"/add-classification",
+   utilities.requireRole(['Employee','Admin']),
 	classValidate.classificationRules(),
 	classValidate.checkClassificationData,
 	utilities.handleErrors(invController.addClassification)
@@ -44,6 +48,7 @@ router.post(
 // Route to add new inventory item
 router.post(
 	"/add-inventory",
+   utilities.requireRole(['Employee','Admin']),
 	invValidate.invRules(),
 	invValidate.checkInvData,
 	utilities.handleErrors(invController.addInventoryItem)
@@ -51,23 +56,30 @@ router.post(
 
 router.get(
 	"/getInventory/:classification_id",
+   utilities.requireRole(['Employee','Admin']),
 	utilities.handleErrors(invController.getInventoryJSON)
 );
 
 router.get(
 	"/edit/:inventory_id",
+   utilities.requireRole(['Employee','Admin']),
 	utilities.handleErrors(invController.buildEditInventory)
 );
 
 router.post(
 	"/update/",
+   utilities.requireRole(['Employee','Admin']),
 	invValidate.invRules(),
 	invValidate.checkUpdateData,
 	utilities.handleErrors(invController.updateInventory)
 );
 
-router.get("/delete/:inventory_id", utilities.handleErrors(invController.buildDeleteView));
+router.get("/delete/:inventory_id", 
+   utilities.requireRole(['Employee','Admin']),
+    utilities.handleErrors(invController.buildDeleteView));
 
-router.post("/delete/", utilities.handleErrors(invController.deleteInventory));
+router.post("/delete/", 
+   utilities.requireRole(['Employee','Admin']),
+    utilities.handleErrors(invController.deleteInventory));
 
 module.exports = router;

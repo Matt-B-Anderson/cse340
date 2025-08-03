@@ -52,8 +52,61 @@ async function getAccountByEmail(account_email) {
 	}
 }
 
+/* **********************
+ *   Get account by email
+ * ********************* */
+async function getAccountById(account_id) {
+	try {
+		const result = await pool.query(
+			"SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1",
+			[account_id]
+		);
+		return result.rows[0];
+	} catch (error) {
+		return new Error("No matching email found");
+	}
+}
+
+/* **********************
+ *   Udate account info
+ * ********************* */
+async function updateAccountInfo(account_id, account_firstname, account_lastname, account_email) {
+	try {
+		const result = await pool.query(
+			`UPDATE account
+                SET account_firstname=$1,
+                    account_lastname=$2,
+                    account_email=$3
+                WHERE account_id=$4
+            RETURNING account_id`,
+			[account_firstname, account_lastname, account_email, account_id]
+		);
+		return result.rows[0];
+	} catch (error) {
+		return new Error("No matching email found");
+	}
+}
+
+/* **********************
+ *   Udate account password
+ * ********************* */
+async function updateAccountPassword(account_id, account_password) {
+	try {
+		const result = await pool.query(
+			`UPDATE account SET account_password=$1 WHERE account_id=$2`,
+			[account_password, account_id]
+		);
+		return result.rows[0];
+	} catch (error) {
+		return new Error("No matching email found");
+	}
+}
+
 module.exports = {
 	registerAccount,
 	checkExistingEmail,
 	getAccountByEmail,
+    getAccountById,
+    updateAccountInfo,
+    updateAccountPassword
 };

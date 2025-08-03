@@ -176,6 +176,7 @@ Util.handleErrors = (fn) => (req, res, next) =>
  * Middleware to check token validity
  **************************************** */
 Util.checkJWTToken = (req, res, next) => {
+    res.locals.accountData = null;
 	if (req.cookies.jwt) {
 		jwt.verify(
 			req.cookies.jwt,
@@ -194,6 +195,26 @@ Util.checkJWTToken = (req, res, next) => {
 	} else {
 		next();
 	}
+};
+
+/* ****************************************
+ * Middleware to check role
+ **************************************** */
+Util.requireRole = (allowedRoles = []) => {
+    return (req, res, next ) => {
+        const acct = res.locals.accountData;
+
+        if (!acct) {
+            req.flash('error', 'Please log in to continue.');
+            return res.redirect('/account/login');
+        }
+
+        if (!allowedRoles.includes(acct.account_type)) {
+            req.flash('error', 'You do not have permission to access that page');
+            return res.redirect('/account/login')
+        }
+        next();
+    };
 };
 
 module.exports = Util;

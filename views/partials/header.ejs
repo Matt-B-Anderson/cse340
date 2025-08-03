@@ -1,6 +1,25 @@
 <header id="top-header">
-    <div class="header-content">
-        <h1>CSE Motors</h1>
-        <div class="account"><a href="/account/login">My Account</a></div>
+  <div class="header-content">
+    <h1>CSE Motors</h1>
+    <div class="account">
+      <ul class="account-links">
+       
+        <% if (!accountData) { %>
+        <li><a href="/account/login">My Account</a></li>
+        <% } else { %>
+       
+        <li>
+          <a href="/account/">
+            Welcome <%= accountData.account_type === 'Client'
+                      ? 'Basic'
+                      : accountData.account_firstname %>
+          </a>
+        </li>
+       
+        <li><a href="/account/logout">Logout</a></li>
+        <% } %>
+      </ul>
+      </a>
     </div>
+  </div>
 </header>
