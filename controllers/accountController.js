@@ -254,7 +254,7 @@ async function updateAccountPassword(req, res, next) {
  *  Logout
  * *************************************** */
 async function logout(req, res, next) {
-    res.clearCookie('token');
+    res.clearCookie('jwt');
     res.redirect('/');
 }
 

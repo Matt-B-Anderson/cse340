@@ -779,6 +779,10 @@ noscript {
     text-decoration: none;
 }
 
+.test-error {
+    color: var(--nav-bg);
+}
+
 @media only screen and (max-width: 414px) {
     nav ul {
         flex-direction: row;
