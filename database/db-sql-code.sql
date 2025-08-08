@@ -248,3 +248,12 @@ WHERE inv_make = 'GM'
 UPDATE public.inventory
 SET inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/');
+
+-- 7. Create a table for users favorite vehicles
+CREATE TABLE IF NOT EXISTS public.favorite (
+  favorite_id SERIAL PRIMARY KEY,
+  account_id  INTEGER NOT NULL REFERENCES public.account(account_id) ON DELETE CASCADE,
+  inv_id      INTEGER NOT NULL REFERENCES public.inventory(inv_id) ON DELETE CASCADE,
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
+  UNIQUE (account_id, inv_id)
+);
