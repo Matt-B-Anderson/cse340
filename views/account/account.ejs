@@ -11,18 +11,25 @@
 <% } %>
 
 <section>
-<p class="link">
-  <a href="/account/update/<%= accountData?.account_id %>">
-    Update Your Account Information
-  </a>
-</p>
-
-<h2>Welcome <%= accountData.account_firstname %></h2>
-
-<% if (accountData.account_type !== 'Client') { %>
-  <h3>Inventory Management</h3>
   <p class="link">
-    <a href="/inv/management">Go to Inventory Management</a>
+    <a href="/account/update/<%= locals.accountData?.account_id %>">
+      Update Your Account Information
+    </a>
   </p>
-<% } %>
+
+  <h2>Welcome <%= locals.accountData?.account_firstname %></h2>
+
+  <% if (locals.accountData?.account_type !== 'Client') { %>
+    <h3>Inventory Management</h3>
+    <p class="link">
+      <a href="/inv/management">Go to Inventory Management</a>
+    </p>
+  <% } %>
+
+  <% if (locals.hasFavorites) { %>
+    <h3>My Saved Vehicles</h3>
+    <p class="link">
+      <a href="/favorites">View Favorites</a>
+    </p>
+  <% } %>
 </section>

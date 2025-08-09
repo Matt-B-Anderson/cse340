@@ -78,11 +78,12 @@ Util.buildClassificationGrid = async function (data) {
 /* **************************************
  * Build the inventory view HTML
  * ************************************ */
-Util.buildInventoryGrid = async function (data) {
-	let html = "";
+Util.buildInventoryGrid = async function (data, opts = {}) {
+  const { isLoggedIn = false, isFavorite = false } = opts;
+  let html = "";
 
-	if (data) {
-		html += `
+  if (data) {
+    html += `
 <section class="inv-detail">
   <!-- left: gallery -->
   <div class="inv-gallery">
@@ -91,13 +92,12 @@ Util.buildInventoryGrid = async function (data) {
     </div>
     <ul class="inv-thumbs">
       ${
-				data.inv_images
-					?.map(
-						(src) =>
-							`<li><img src="${src}" alt="${v.inv_make} ${v.inv_model}"></li>`
-					)
-					.join("") ?? ""
-			}
+        data.inv_images
+          ?.map(
+            (src) => `<li><img src="${src}" alt="${data.inv_make} ${data.inv_model}"></li>`
+          )
+          .join("") ?? ""
+      }
     </ul>
   </div>
 
@@ -106,31 +106,39 @@ Util.buildInventoryGrid = async function (data) {
     <h1>${data.inv_year} ${data.inv_make} ${data.inv_model}</h1>
 
     <div class="inv-price-block">
-      <div class="inv-price-label">
-        Price
-      </div>
-      <div class="inv-price">
-        $${new Intl.NumberFormat("en-US").format(data.inv_price)}
-      </div>
-      <div class="inv-mileage">
-        ${new Intl.NumberFormat("en-US").format(data.inv_miles)} miles
-      </div>
+      <div class="inv-price-label">Price</div>
+      <div class="inv-price">$${new Intl.NumberFormat("en-US").format(data.inv_price)}</div>
+      <div class="inv-mileage">${new Intl.NumberFormat("en-US").format(data.inv_miles)} miles</div>
     </div>
 
     <ul class="inv-specs">
-      <li><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(
-				data.inv_miles
-			)}</li>
+      <li><strong>Mileage:</strong> ${new Intl.NumberFormat("en-US").format(data.inv_miles)}</li>
       <li><strong>Ext. Color:</strong> ${data.inv_color}</li>
     </ul>
+
+    ${
+      isLoggedIn
+        ? isFavorite
+          ? `
+            <form method="post" action="/favorites/${data.inv_id}/delete" style="display:inline;">
+              <button class="button button-secondary">Remove from Saved</button>
+            </form>
+          `
+          : `
+            <form method="post" action="/favorites/${data.inv_id}" style="display:inline;">
+              <button class="button">Save</button>
+            </form>
+          `
+        : ""
+    }
   </div>
 </section>
 `;
-	} else {
-		html = `<p class="notice">Sorry, no vehicle details available.</p>`;
-	}
+  } else {
+    html = `<p class="notice">Sorry, no vehicle details available.</p>`;
+  }
 
-	return html;
+  return html;
 };
 
 Util.buildClassificationList = async function (classification_id = null) {

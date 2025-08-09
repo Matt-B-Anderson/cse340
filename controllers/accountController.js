@@ -1,5 +1,6 @@
 const utilities = require("../utilities/index");
 const accountModel = require("../models/account-model");
+const favModel= require("../models/favorite-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -35,11 +36,22 @@ async function buildRegister(req, res, next) {
  * *************************************** */
 async function buildAccount(req, res, next) {
 	let nav = await utilities.getNav();
+    const accountData = res.locals.accountData;
+
+    // check for favorites
+    let hasFavorites = false;
+    if (accountData) {
+        const favs = await favModel.listFavorites(accountData.account_id);
+        hasFavorites = favs.length > 0;
+    }
+
 	res.render("./account/account", {
 		title: "Account Management",
 		nav,
 		messages: req.flash("notice") || [],
 		errors: [],
+        accountData,
+        hasFavorites
 	});
 }
 

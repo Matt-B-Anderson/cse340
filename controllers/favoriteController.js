@@ -10,7 +10,7 @@ const favController = {
     const nav = await utilities.getNav();
     const data = await favModel.listFavorites(res.locals.accountData.account_id);
     const grid = await utilities.buildClassificationGrid(data); // reuse grid helper
-    res.render("account/favorites", { title: "My Saved Vehicles", nav, grid, messages: [] });
+    res.render("account/favorites", { title: "My Saved Vehicles", nav, grid, messages: [], errors: [] });
   },
 
 /* ****************************************
